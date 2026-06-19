@@ -9,7 +9,7 @@ import PIMPage from "@pages/pimpage";
 import AddEmployeePage from "@pages/addemppage";
 
 // Extend the base test with passing pageobjects to all tests in the worker scope (before all tests in the worker starts and after all tests in the worker ends)
-
+//M means modified
 export let test = base.extend< {
     basePage: BasePage,
     dashboardPage: DashboardPage,
