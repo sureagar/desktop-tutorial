@@ -1,0 +1,7 @@
+Clicked on PIM Link
+PIM Page is displayed
+Clicked on Add Button
+Entered First Name John
+Entered Last Name Smith
+Clicked on Save Button
+Personal Details Page is displayed
