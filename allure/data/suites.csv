@@ -1,3 +1,3 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","8653","Add Employee","vibetestq","2026-06-19","passed","2026-06-19","OrangeHRM End to End","POMTestSerialMode.spec.ts","",""
-"","5295","Login Test","vibetestq","2026-06-19","passed","2026-06-19","OrangeHRM End to End","POMTestSerialMode.spec.ts","",""
+"","5026","Login Test","vibetestq","2026-06-19","passed","2026-06-19","OrangeHRM End to End","POMTestSerialMode.spec.ts","",""
+"","9091","Add Employee","vibetestq","2026-06-19","passed","2026-06-19","OrangeHRM End to End","POMTestSerialMode.spec.ts","",""

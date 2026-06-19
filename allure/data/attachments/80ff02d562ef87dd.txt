@@ -1,0 +1,5 @@
+Navigated to URL /
+Entered username testadmin
+Entered password Vibetestq@123#
+Clicked on Login Button
+Dashboard Page is displayed
