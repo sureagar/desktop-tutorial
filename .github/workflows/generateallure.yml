@@ -1,0 +1,141 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+permissions:
+  contents: write          # Required to push to gh-pages branch
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps chromium
+
+    # ─── Restore previous Allure history for trend charts ────────────────────
+
+    - name: Download previous Allure history
+      uses: actions/checkout@v4
+      continue-on-error: true
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    # ─── Run tests ───────────────────────────────────────────────────────────
+
+    - name: Run Playwright tests
+      run: npx playwright test --project=vibetestq
+      env:
+        CI: true
+      continue-on-error: true  # Publish report even when tests fail
+
+    - name: Copy Allure history from previous run
+      if: always()
+      run: |
+        if [ -d "gh-pages/allure/history" ]; then
+          mkdir -p allure-results/history
+          cp -r gh-pages/allure/history/. allure-results/history/
+          echo "History files copied:"
+          ls allure-results/history/
+        else
+          echo "No previous history found — first run baseline"
+        fi
+
+    # ─── Generate Allure Report ───────────────────────────────────────────────
+
+    - name: Generate Allure HTML report
+      run: npx allure generate ./allure-results -o ./allure-report --clean
+      if: always()
+
+    # ─── Publish to GitHub Pages ──────────────────────────────────────────────
+
+    - name: Prepare gh-pages directory structure
+      if: always()
+      run: |
+        mkdir -p gh-pages-deploy/allure
+        cp -r allure-report/. gh-pages-deploy/allure/
+
+        mkdir -p gh-pages-deploy/latest
+        cp -r playwright-report/. gh-pages-deploy/latest/
+
+        cat > gh-pages-deploy/index.html << 'EOF'
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Test Reports</title>
+          <style>
+            body { font-family: Arial, sans-serif; max-width: 600px; margin: 80px auto; text-align: center; }
+            h1 { color: #333; }
+            .cards { display: flex; gap: 24px; justify-content: center; margin-top: 40px; }
+            a.card { display: block; padding: 32px 40px; border-radius: 8px; text-decoration: none;
+                     font-size: 18px; font-weight: bold; color: white; }
+            .allure  { background: #e85a4f; }
+            .latest  { background: #4f8ee8; }
+            a.card:hover { opacity: 0.85; }
+            p { color: #666; font-size: 14px; margin-top: 8px; }
+          </style>
+        </head>
+        <body>
+          <h1>Playwright Test Reports</h1>
+          <div class="cards">
+            <div>
+              <a class="card allure" href="allure/index.html">Allure Report</a>
+              <p>History &amp; trend charts</p>
+            </div>
+            <div>
+              <a class="card latest" href="latest/index.html">Latest Run</a>
+              <p>Screenshots &amp; traces</p>
+            </div>
+          </div>
+        </body>
+        </html>
+        EOF
+
+    - name: Publish Allure report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: gh-pages-deploy
+        keep_files: true
+        commit_message: |
+          Allure report — run ${{ github.run_number }}
+
+    # ─── Upload artifacts as backup ───────────────────────────────────────────
+
+    - name: Upload Playwright HTML report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report-${{ github.run_number }}
+        path: playwright-report/
+        retention-days: 30
+
+    - name: Upload Allure results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: allure-results-${{ github.run_number }}
+        path: allure-results/
+        retention-days: 30

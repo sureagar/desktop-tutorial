@@ -1,0 +1,22 @@
+{
+    "empData": [
+        {
+            "firstName": "Test",
+            "lastName": "Employee",
+            "username": "testemployee",
+            "password": "Test@1234"
+        },
+        {
+            "firstName": "Test2",
+            "lastName": "Employee2",
+            "username": "testemployee2",
+            "password": "Test@1234"
+        },
+        {
+            "firstName": "Test3",
+            "lastName": "Employee3",
+            "username": "testemployee3",
+            "password": "Test@1234"
+        }
+    ]
+}

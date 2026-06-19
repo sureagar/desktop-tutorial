@@ -1,0 +1,14 @@
+{
+    "toolName": "Playwright",
+    "version": "1.20.0",
+    "isOpenSource": true,
+    "languagesSupported": [
+        "JavaScript",
+        "Python",
+        "C#"
+    ],
+    "company": {
+        "name": "Microsoft",
+        "founded": 1975
+    }
+}

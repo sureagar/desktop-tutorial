@@ -1,0 +1,10 @@
+<testing>
+<testcase name="TestCase1">
+    <input>Input data for TestCase1</input>
+    <expected>Expected result for TestCase1</expected>
+</testcase>
+<testcase name="TestCase2">
+    <input>Input data for TestCase2</input>
+    <expected>Expected result for TestCase2</expected>
+</testcase>
+</testing>

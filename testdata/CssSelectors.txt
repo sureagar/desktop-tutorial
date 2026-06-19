@@ -1,0 +1,49 @@
+Css Selectors
+
+Finding elements using attributes 
+find elements using index
+
+Using real relations
+
+Finding elements using parent
+finding elements using child
+finding elements using siblings
+finding elements by creating long relations
+
+Finding by Visual relations
+
+
+Self, Real Relations, Visual Relations, Blind Index
+
+Self: Using attributes
+Real Relations: 
+
+Visual Relations given by playwright not CSS Selectors
+playwright enhanced CSS and added some more features
+
+
+// playwright Selectors
+getByRole Locators
+GetByText
+
+page.getByLabel("Name:")
+page.getByTitle("Python Tutorial").hover()
+
+
+Identification: Use the information provided by Dev
+If dev follows UI standards and Accessibility Standards, it will be easy for test automation
+
+The problem is even if they dont follow, it still works
+
+
+//Task1
+
+// Create a sample Registration form with css classes
+// First Name, Last Name, Email Id, PAssword, Gender, Country, Accept terms with checkbox and link
+// At the end register button
+
+//Task2
+// Practice CSS Selectors by inspecting (Right Click > Inspect > Ctrl+f)
+
+//Task3
+// Automte ORangeHRM Flow using Playwright and CSS Selectors

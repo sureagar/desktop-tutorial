@@ -1,0 +1,41 @@
+{
+  "name": "pw-apr15-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "JSBehaviour.js",
+  "scripts": {
+    "test:vibtestq": "npx playwright test e2e/POMWithDDT.spec.ts --headed --project=vibetestq",
+    "generate:allure": "npx allure generate ./allure-results -o ./allure-report",
+    "open:allure": "npx allure open ./allure-report",
+    "runtestwithallure": "npm run test:vibtestq && npm run generate:allure && npm run open:allure",
+    "cucumber": "npx cucumber-js --require-module ts-node/register --require bdd/steps/**/*.steps.ts bdd/features/**/*.feature"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@cucumber/pretty-formatter": "^4.0.0",
+    "@faker-js/faker": "^10.4.0",
+    "@ngneat/falso": "^8.0.2",
+    "allure": "^3.12.0",
+    "allure-commandline": "^2.42.0",
+    "dotenv": "^17.4.2",
+    "mysql2": "^3.22.4",
+    "xlsx": "^0.18.5"
+  },
+  "paths": {
+    "@pages": "./pages",
+    "@tests": "./e2e",
+    "@fixtures": "./fixture",
+    "@data": "./testdata"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^13.0.0",
+    "@playwright/test": "^1.61.0",
+    "@types/node": "^25.9.3",
+    "allure-playwright": "^3.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}

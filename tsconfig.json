@@ -1,0 +1,40 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    // Environment Settings
+    // See also https://aka.ms/tsconfig/module
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "esnext",
+    "types": [
+      "node"
+    ],
+    "resolveJsonModule": true,
+    // Other Outputs
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    // Recommended Options
+    "strict": true,
+    "paths": {
+      "@pages/*": [
+        "./pages/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ],
+      "@tests/*": [
+        "./e2e/*"
+      ],
+       "@fixtures/*": [
+        "./fixture/*"
+      ],
+       "@testdata/*": [
+        "./testdata/*"
+      ],
+        "@reports/*": [
+          "./playwright-report/*"
+        ]
+    }
+  }
+}
